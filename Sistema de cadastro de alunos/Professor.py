@@ -1,24 +1,31 @@
-import os
-from datetime import date
-from Pessoa import Pessoa
 from Curso import Curso
-import Endereco
 
-
-class Professor(Pessoa):
+class Professor:
     idProfessor = 0
 
     def __init__(self):
-        super().__init__()
         self.matricula = ""
-        self.curso = Curso("")
+        self.curso = None
+        self.nome = input("Digite o nome: ")
+
+    def criarCurso(self, nome_curso):
+        if self.curso is None:
+            self.curso = Curso(nome_curso)
+            print(f"Curso '{nome_curso}' criado com sucesso.")
+        else:
+            print("Você já está vinculado a um curso.")
+
+    def adicionarDisciplina(self, nome_disciplina, sala_numero):
+        if self.curso is None:
+            print("Você precisa criar um curso primeiro.")
+            return
+        self.curso.adicionarDisciplina(nome_disciplina, sala_numero)
 
     def cadastrarProfessor(self):
-        self.curso.novoCurso(input("Digite o nome do curso: "))
+        if self.curso is None:
+            print("Você precisa criar um curso primeiro.")
+            return
         Professor.idProfessor += 1
-        data = date.today()
-        data_formatada = data.strftime("%Y%m%d")
-        self.matricula = f"{data_formatada}0{Professor.idProfessor}"
-        print(f"Nome: {self.nome}\nMatrícula: {self.matricula}\nCurso: {self.curso.nome}\nEndereço: {
-              self.endereco.rua}, {self.endereco.numero}, {self.endereco.bairro}, CEP: {self.endereco.cep}")
+        self.matricula = f"{Professor.idProfessor:04d}"
+        print(f"Nome: {self.nome}\nMatrícula: {self.matricula}\nCurso: {self.curso.nome}")
         print("Professor cadastrado com sucesso!")

@@ -1,24 +1,27 @@
-import os
-from datetime import date
-from Pessoa import Pessoa
 from Curso import Curso
-import Endereco
 
-
-class Aluno(Pessoa):
-    idAluno = 0
-
+class Aluno:
     def __init__(self):
-        super().__init__()
-        self.matricula = ""
-        self.curso = Curso("")
+        self.nome = input("Digite o nome do aluno: ")
+        self.curso = None
 
-    def cadastrarAluno(self):
-        self.curso.novoCurso(input("Digite o nome do curso: "))
-        Aluno.idAluno += 1
-        data = date.today()
-        data_formatada = data.strftime("%Y%m%d")
-        self.matricula = f"{data_formatada}0{Aluno.idAluno}"
-        print(f"Nome: {self.nome}\nMatrícula: {self.matricula}\nCurso: {self.curso.nome}\nEndereço: {
-              self.endereco.rua}, {self.endereco.numero}, {self.endereco.bairro}, CEP: {self.endereco.cep}")
-        print("Aluno cadastrado com sucesso!")
+    def verCursosDisponiveis(self):
+        print("Cursos Disponíveis:")
+        for i, curso in enumerate(Curso.cursos_disponiveis, 1):
+            print(f"{i}. {curso.nome}")
+
+    def selecionarCurso(self, numero_curso):
+        if 1 <= numero_curso <= len(Curso.cursos_disponiveis):
+            self.curso = Curso.cursos_disponiveis[numero_curso - 1]
+            print(f"Curso selecionado: {self.curso.nome}")
+        else:
+            print("Número de curso inválido.")
+
+    def mostrarDisciplinas(self):
+        if self.curso:
+            print(f"Disciplinas do curso '{self.curso.nome}':")
+            for disciplina in self.curso.disciplinas:
+                print(f"Disciplina: {disciplina.nome}, Sala: {disciplina.sala}")
+        else:
+            print("Nenhum curso selecionado.")
+
