@@ -1,10 +1,26 @@
 from Curso import Curso
-
+from Endereco import Endereco
 class Aluno:
+    idAluno = 0
+
     def __init__(self):
         self.nome = input("Digite o nome do aluno: ")
+        Aluno.idAluno += 1
+        self.matricula = 2024 + Aluno.idAluno
         self.curso = None
-
+        self.endereco = Endereco()
+        self.endereco.cadastrarEndereco(
+            input("Digite a rua: "),
+            input("Digite o número: "),
+            input("Digite o bairro: "),
+            input("Digite o CEP: "),
+            input("Digite o complemento (opcional): "),
+            input("Digite o município: "),
+            input("Digite o estado: ")
+        )
+        print(f"Nome: {self.nome}\nEndereço: {self.endereco.rua}, {self.endereco.numero}, {self.endereco.bairro}, CEP: {self.endereco.cep}")
+        print("Aluno cadastrado com sucesso!")
+        
     def verCursosDisponiveis(self):
         print("Cursos Disponíveis:")
         for i, curso in enumerate(Curso.cursos_disponiveis, 1):
@@ -24,4 +40,3 @@ class Aluno:
                 print(f"Disciplina: {disciplina.nome}, Sala: {disciplina.sala}")
         else:
             print("Nenhum curso selecionado.")
-

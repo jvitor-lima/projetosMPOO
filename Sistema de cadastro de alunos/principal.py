@@ -3,8 +3,8 @@ from Aluno import Aluno
 from Curso import Curso
 
 usuario1 = Professor()
-usuario1.cadastrarProfessor()
 curso1 = Curso("Sistemas de Informação")
+usuario1.cadastrarProfessor()
 curso1.adicionarDisciplina("Lógica de Programação", "Sala 1")
 curso1.adicionarDisciplina("MPOO", "Sala 12")
 curso1.definirSala("MPOO", "Sala 15")
