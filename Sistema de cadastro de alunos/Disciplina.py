@@ -1,4 +1,8 @@
+from Sala import Sala
+
+
 class Disciplina:
-    def __init__(self, nome, sala):
+    def __init__(self, nome, curso):
         self.nome = nome
-        self.sala = sala
+        self.curso = curso
+        self.sala = None
